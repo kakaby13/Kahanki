@@ -2,7 +2,7 @@
 
 namespace Kahanki.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IEntity
     {
 
     }
