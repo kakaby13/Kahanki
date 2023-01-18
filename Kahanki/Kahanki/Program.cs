@@ -1,5 +1,6 @@
 using Kahanki.Data;
 using Kahanki.Models;
+using Kahanki.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -18,6 +19,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+builder.Services
+    .AddTransient<ApplicationDbContext>()
+    .AddTransient<IUserSettingsService, UserSettingsService>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();

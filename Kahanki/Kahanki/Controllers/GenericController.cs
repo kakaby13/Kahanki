@@ -16,7 +16,7 @@ public class GenericController<TEntity> : ControllerBase where TEntity : class, 
         _dbSet = _dbContext.Set<TEntity>();
     }
 
-    [HttpPost]
+    [HttpPost("Create")]
     public TEntity Create(TEntity entity)
     {
         _dbSet.Add(entity);
@@ -25,14 +25,14 @@ public class GenericController<TEntity> : ControllerBase where TEntity : class, 
         return _dbSet.Single(c => c.Id == entity.Id);
     }
 
-    [HttpGet]
+    [HttpGet("Read")]
     public TEntity Read(string id)
     {
         return _dbSet.Single(c => c.Id == id);
     }
 
-    [HttpPost]
-    public TEntity Update(TEntity entity)
+    [HttpPut("Update")]
+    public TEntity Update([FromBody] TEntity entity)
     {
         _dbSet.Update(entity);
         _dbContext.SaveChanges();
@@ -40,16 +40,18 @@ public class GenericController<TEntity> : ControllerBase where TEntity : class, 
         return _dbSet.Single(c => c.Id == entity.Id);
     }
 
-    [HttpPost]
+    [HttpPost("Delete")]
     public void Delete(string id)
     {
-        var entity = _dbSet.FirstOrDefault(r => r.Id == id);
-        _dbSet.Remove(entity);
-
-        _dbContext.SaveChanges();
+        var entity = _dbSet.SingleOrDefault(r => r.Id == id);
+        if (entity != null)
+        {
+            _dbSet.Remove(entity);
+            _dbContext.SaveChanges();
+        }
     }
 
-    [HttpGet]
+    [HttpGet("GetAll")]
     public IEnumerable<TEntity> GetAll()
     {
         return _dbSet.ToList();
