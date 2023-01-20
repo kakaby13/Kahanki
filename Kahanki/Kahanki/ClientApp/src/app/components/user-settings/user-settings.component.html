@@ -1,3 +1,15 @@
 <input type="text" [(ngModel)]="settings.age">
 
+<select [(ngModel)]="settings.sex">
+    <option [value]="0">Male</option>
+    <option [value]="1">Female</option>
+    <option [value]="2">Other</option>
+</select>
+
+<select [(ngModel)]="settings.preferences">
+    <option [value]="0">Male</option>
+    <option [value]="1">Female</option>
+    <option [value]="2">Other</option>
+</select>
+
 <input type="button" (click)="Save()" value="Save" />

@@ -11,7 +11,9 @@ import { UserSettingsModel } from 'src/app/models/UserSettingsModel';
 export class UserSettingsComponent {
   public settings: UserSettingsModel = {
     id: '',
-    age: 0
+    age: 0,
+    sex: 0,
+    preferences: 0
   };
 
   constructor(private userSettingsService: UserSettingsService) {
