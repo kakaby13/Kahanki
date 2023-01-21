@@ -27,13 +27,13 @@ namespace Kahanki.Data
                 .HasOne(c => c.ActedUser)
                 .WithMany(c => c.OwnMatchActions)
                 .HasForeignKey(c => c.ActedUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.Entity<UserMatchAction>()
                 .HasOne(c => c.TargetUser)
                 .WithMany(c => c.TargetMatchActions)
                 .HasForeignKey(c => c.TargetUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }

@@ -12,6 +12,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { SwipeComponent } from './components/swipe/swipe.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     NavMenuComponent,
     HomeComponent,
     FetchDataComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    SwipeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,7 +31,9 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'user-settings', component: UserSettingsComponent },
+      { path: 'user-settings', component: UserSettingsComponent, canActivate: [AuthorizeGuard] },
+      { path: 'swipe', component: SwipeComponent, canActivate: [AuthorizeGuard] },
+      
     ])
   ],
   providers: [

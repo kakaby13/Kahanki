@@ -2,8 +2,6 @@ using Kahanki.Data;
 using Kahanki.Models;
 using Kahanki.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +20,9 @@ builder.Services.AddIdentityServer()
 
 builder.Services
     .AddTransient<ApplicationDbContext>()
-    .AddTransient<IUserSettingsService, UserSettingsService>();
+    .AddTransient<IUserSettingsService, UserSettingsService>()
+    .AddTransient<IMatchService, MatchService>()
+    .AddTransient<IUserProfileService, UserProfileService>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
