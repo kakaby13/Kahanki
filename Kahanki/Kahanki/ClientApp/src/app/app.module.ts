@@ -13,6 +13,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { SwipeComponent } from './components/swipe/swipe.component';
+import { ChatListComponent } from './components/chat-list/chat-list.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SwipeComponent } from './components/swipe/swipe.component';
     HomeComponent,
     FetchDataComponent,
     UserSettingsComponent,
+    ChatListComponent,
+    ChatComponent,
     SwipeComponent
   ],
   imports: [
@@ -33,7 +37,8 @@ import { SwipeComponent } from './components/swipe/swipe.component';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'user-settings', component: UserSettingsComponent, canActivate: [AuthorizeGuard] },
       { path: 'swipe', component: SwipeComponent, canActivate: [AuthorizeGuard] },
-      
+      { path: 'chats', component: ChatListComponent, canActivate: [AuthorizeGuard] },
+      { path: 'chat/:id', component: ChatComponent, canActivate: [AuthorizeGuard] },      
     ])
   ],
   providers: [

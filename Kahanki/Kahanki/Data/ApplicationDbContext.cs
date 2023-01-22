@@ -11,8 +11,8 @@ namespace Kahanki.Data
         public DbSet<UserSettings> UserSettings { get; set; } = null!;
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
         public DbSet<UserMatchAction> UserMatchActions { get; set; } = null!;
-
-
+        public DbSet<Message> Messages { get; set; } = null!;
+        
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {
@@ -34,6 +34,22 @@ namespace Kahanki.Data
                 .WithMany(c => c.TargetMatchActions)
                 .HasForeignKey(c => c.TargetUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+            builder.Entity<Message>()
+                .HasOne(c => c.Sender)
+                .WithMany(c => c.MessagesSent)
+                .HasForeignKey(c => c.SenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.Entity<Message>()
+                .HasOne(c => c.Reciever)
+                .WithMany(c => c.MessagesReceived)
+                .HasForeignKey(c => c.RecieverId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // TODO
+            //прописать связи к чату 1) от пользователей и 2) от сообщений
         }
     }
 }

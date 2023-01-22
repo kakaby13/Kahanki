@@ -1,16 +1,26 @@
-﻿using Kahanki.Models;
+﻿using Kahanki.Data;
+using Kahanki.Models;
 
 namespace Kahanki.Services;
 
 public class MatchService : IMatchService
 {
-    public void GetAllMatchesByUserId(string userId)
+    private readonly ApplicationDbContext _db;
+
+    public MatchService(ApplicationDbContext db)
     {
+        _db = db;
+    }
+
+    public List<string> GetAllCouplesByUserId(string userId)
+    {
+        //TODO
         throw new NotImplementedException();
     }
 
     public bool CheckIsMatchTakePlace(UserMatchAction matchAction)
     {
+        //TODO
         throw new NotImplementedException();
     }
 }

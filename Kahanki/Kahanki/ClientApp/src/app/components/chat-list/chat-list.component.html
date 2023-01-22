@@ -1,0 +1,8 @@
+<h1>Тут будет список чатиков</h1>
+
+<div *ngIf="chatList">
+    <div *ngFor="let chat of chatList">
+        <div [routerLink]="['/chat', chat.id]">{{chat.name}}</div>
+    </div>
+
+</div>

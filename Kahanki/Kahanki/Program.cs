@@ -22,6 +22,7 @@ builder.Services
     .AddTransient<ApplicationDbContext>()
     .AddTransient<IUserSettingsService, UserSettingsService>()
     .AddTransient<IMatchService, MatchService>()
+    .AddTransient<IChatService, ChatService>()
     .AddTransient<IUserProfileService, UserProfileService>();
 
 builder.Services.AddAuthentication()
