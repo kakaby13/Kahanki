@@ -8,8 +8,6 @@ namespace Kahanki.Models
 
         public virtual List<UserMatchAction> OwnMatchActions { get; set; } = new List<UserMatchAction>();
         public virtual List<UserMatchAction> TargetMatchActions { get; set; } = new List<UserMatchAction>();
-
-        public virtual List<Message> MessagesSent { get; set; } = new List<Message>();
-        public virtual List<Message> MessagesReceived { get; set; } = new List<Message>();
+        public virtual List<Chat> Chats { get; set; } = new List<Chat>();
     }
 }

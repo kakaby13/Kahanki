@@ -35,21 +35,15 @@ namespace Kahanki.Data
                 .HasForeignKey(c => c.TargetUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-
             builder.Entity<Message>()
-                .HasOne(c => c.Sender)
-                .WithMany(c => c.MessagesSent)
-                .HasForeignKey(c => c.SenderId)
+                .HasOne(c => c.Chat)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(c => c.ChatId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            builder.Entity<Message>()
-                .HasOne(c => c.Reciever)
-                .WithMany(c => c.MessagesReceived)
-                .HasForeignKey(c => c.RecieverId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            // TODO
-            //прописать связи к чату 1) от пользователей и 2) от сообщений
+            builder.Entity<Chat>()
+                .HasMany(c => c.Users)
+                .WithMany(c => c.Chats);
         }
     }
-}
+} 

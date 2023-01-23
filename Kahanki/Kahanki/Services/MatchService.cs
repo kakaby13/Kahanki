@@ -1,5 +1,6 @@
 ﻿using Kahanki.Data;
 using Kahanki.Models;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Kahanki.Services;
 
@@ -14,13 +15,28 @@ public class MatchService : IMatchService
 
     public List<string> GetAllCouplesByUserId(string userId)
     {
-        //TODO
-        throw new NotImplementedException();
+        var actionUsers = _db.UserMatchActions
+            .Where(r => r.ActedUserId == userId && (r.ActionId == (int)MatchAction.Like || r.ActionId == (int)MatchAction.SuperLike))
+            .Select(r => r.TargetUserId)
+            .ToList();
+
+        var targetUsers = _db.UserMatchActions
+            .Where(r => r.TargetUserId == userId && (r.ActionId == (int)MatchAction.Like || r.ActionId == (int)MatchAction.SuperLike))
+            .Select(r => r.TargetUserId)
+            .ToList();
+
+        return actionUsers.Intersect(targetUsers).ToList();
     }
 
     public bool CheckIsMatchTakePlace(UserMatchAction matchAction)
     {
-        //TODO
-        throw new NotImplementedException();
+        if (matchAction.ActionId != (int)MatchAction.Dislike)
+        {
+            return _db.UserMatchActions.SingleOrDefault(r => r.ActedUserId == matchAction.TargetUserId &&
+                                                             r.TargetUserId == matchAction.ActedUserId &&
+                                                             r.ActionId != (int)MatchAction.Dislike) != null;
+        }
+
+        return false;
     }
 }
