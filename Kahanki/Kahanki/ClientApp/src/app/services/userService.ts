@@ -13,6 +13,6 @@ export class UserService {
     }
 
     GetCurrentUserId(): Observable<string> {
-        return this.httpClient.get(`${this.baseUrl + ApiRoutes.UserSettings}/GetCurrentUser`) as Observable<string>;
+        return this.httpClient.get(`${this.baseUrl + ApiRoutes.UserSettings}/GetCurrentUserId`,{responseType: 'text'}) as Observable<string>;
     }
   }
