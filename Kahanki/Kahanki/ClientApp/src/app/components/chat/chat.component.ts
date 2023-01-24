@@ -66,13 +66,14 @@ export class ChatComponent implements OnInit, OnDestroy {
           };   
 
 
-          this.connection.on(this.chat.id, (username: string, message: string) => {
-            alert("new message!")
-            const m = document.createElement("div");
-            const messages: HTMLDivElement = document.querySelector("#messages")!;
-            m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
-          
-            messages.appendChild(m);
+          this.connection.on('messageReceived', (chatId: string, username: string, message: string) => {
+            if(chatId == this.chat.id) {
+              const m = document.createElement("div");
+              const messages: HTMLDivElement = document.querySelector("#messages")!;
+              m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
+            
+              messages.appendChild(m);
+            }
           });
 
 
