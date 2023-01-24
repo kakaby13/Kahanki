@@ -22,7 +22,7 @@ public class MatchService : IMatchService
 
         var targetUsers = _db.UserMatchActions
             .Where(r => r.TargetUserId == userId && (r.ActionId == (int)MatchAction.Like || r.ActionId == (int)MatchAction.SuperLike))
-            .Select(r => r.TargetUserId)
+            .Select(r => r.ActedUserId)
             .ToList();
 
         return actionUsers.Intersect(targetUsers).ToList();

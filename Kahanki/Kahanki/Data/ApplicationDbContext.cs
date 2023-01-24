@@ -12,7 +12,8 @@ namespace Kahanki.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
         public DbSet<UserMatchAction> UserMatchActions { get; set; } = null!;
         public DbSet<Message> Messages { get; set; } = null!;
-        
+        public DbSet<Chat> Chats { get; set; } = null!;
+
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {

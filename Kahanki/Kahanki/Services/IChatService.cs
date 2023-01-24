@@ -1,4 +1,5 @@
-﻿using Kahanki.ViewModels;
+﻿using Kahanki.Models;
+using Kahanki.ViewModels;
 
 namespace Kahanki.Services
 {
@@ -6,6 +7,6 @@ namespace Kahanki.Services
     {
         List<UserShortProfile> GetChatListByUserId(string userId);
 
-        ChatModel GetChat(string userId, string targetUserId);
+        Chat GetChat(string userId, string targetUserId);
     }
 }

@@ -1,26 +1,77 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/userService';
-import { DateService } from 'src/app/services/dateService';
 import { ActivatedRoute } from '@angular/router';
+import { ChatModel } from 'src/app/models/chatModel';
+import { ChatService } from 'src/app/services/chatService';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  providers: [DateService, UserService]
+  styleUrls: ['./chat.component.css'],
+  providers: [ChatService]
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  id!: number;
+  id!: string;
   private sub: any;
 
-  constructor(private route: ActivatedRoute) {}
+  currentMessage: string = '';
+
+  chat: ChatModel = {
+    Id: '',
+    messages: [],
+    users: []
+  }
+
+  constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id'];
+       this.id = params['id'];
+       this.populate();
+      //  this.chatService.GetChatByTargetId(this.id).toPromise().then(c => this.chat = c);
     });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  Send() {
+
+  }
+
+  populate() {
+    this.chat = {
+      Id: 'qweqwe',
+      users: [
+        {
+          Id: '1',
+          userName: 'Bob'
+        },
+        {
+          Id: '2',
+          userName: 'Alice'
+        }
+      ],
+      messages: [
+        {
+          Id:'qwe',
+          senderId:'1',
+          content: 'qweqweqwe',
+          created: new Date()
+        },
+        {
+          Id:'qwe',
+          senderId:'2',
+          content: 'terwteryer',
+          created: new Date()
+        },
+        {
+          Id:'qwe',
+          senderId:'1',
+          content: 'qweqweqwe',
+          created: new Date()
+        }
+      ]
+    }
   }
 }

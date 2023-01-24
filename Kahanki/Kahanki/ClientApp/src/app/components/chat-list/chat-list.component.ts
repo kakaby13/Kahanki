@@ -12,8 +12,8 @@ export class ChatListComponent {
     public chatList: UserShortProfileModel[] = [];
 
   constructor(private chatService: ChatService) {
-    // chatService.GetAllChatsForCurrentUser().toPromise().then(c => this.chatList = c);
-    this.populate();
+    chatService.GetAllChatsForCurrentUser().toPromise().then(c => this.chatList = c);
+    // this.populate();
   }
 
   async ngOnInit()	{

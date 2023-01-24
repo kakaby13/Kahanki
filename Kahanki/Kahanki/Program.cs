@@ -1,4 +1,5 @@
 using Kahanki.Data;
+using Kahanki.Hubs;
 using Kahanki.Models;
 using Kahanki.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -30,6 +31,7 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -56,6 +58,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapHub<ChatHub>("/chatHub");
 
 app.MapFallbackToFile("index.html"); ;
 

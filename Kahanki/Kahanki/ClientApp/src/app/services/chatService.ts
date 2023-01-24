@@ -19,6 +19,5 @@ export class ChatService {
 
     GetChatByTargetId(targetUserId: string) {
         return this.httpClient.get(`${this.baseUrl + ApiRoutes.Chat}/GetChatByTargetUserId?targetUserId=${targetUserId}`) as Observable<ChatModel>;
-
     }
   }
