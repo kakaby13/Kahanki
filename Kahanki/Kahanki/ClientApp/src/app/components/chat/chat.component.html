@@ -2,10 +2,10 @@
 
 <div>
     <div *ngFor="let message of chat.messages">
-        <div class="message message-a" *ngIf="message.senderId == chat.users[0].Id">
+        <div class="message message-a" *ngIf="message.senderId == chat.users[0].id">
             <div>{{chat.users[0].userName}} says {{message.content}}</div>
         </div>
-        <div class="message message-b" *ngIf="message.senderId == chat.users[1].Id">
+        <div class="message message-b" *ngIf="message.senderId == chat.users[1].id">
             <div>{{chat.users[1].userName}} says {{message.content}}</div>
         </div>
     </div>

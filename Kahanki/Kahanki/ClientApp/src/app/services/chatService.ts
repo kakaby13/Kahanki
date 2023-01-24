@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { ApiRoutes } from '../common/ApiRoutes';
 import { UserShortProfileModel } from '../models/UserShortProfileModel';
 import { ChatModel } from '../models/chatModel';
+import { tap, map } from 'rxjs/operators';
 
 
 @Injectable()
 export class ChatService {
     constructor(
-      private readonly httpClient: HttpClient, 
+      private readonly httpClient: HttpClient,
       @Inject('BASE_URL') private baseUrl: string) {
     }
 
@@ -18,6 +19,16 @@ export class ChatService {
     }
 
     GetChatByTargetId(targetUserId: string) {
-        return this.httpClient.get(`${this.baseUrl + ApiRoutes.Chat}/GetChatByTargetUserId?targetUserId=${targetUserId}`) as Observable<ChatModel>;
+        return this.httpClient.get<ChatModel>(`${this.baseUrl + ApiRoutes.Chat}/GetChatByTargetUserId?targetUserId=${targetUserId}`);
+      //   .pipe(
+      //     tap((receivedData: ChatModel) => console.log(receivedData)),
+      //     // map((receivedData: ChatModel) => {
+      //     //     return new RegularUser(
+      //     //         receivedData.uid,
+      //     //         receivedData.first_name,
+      //     //         receivedData.last_name,
+      //     //         receivedData.token);
+      //     // })
+      // );
     }
   }

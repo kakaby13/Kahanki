@@ -2,7 +2,7 @@ import { MessageModel } from "./MessageModel";
 import { UserModel } from "./userModel";
 
 export class ChatModel {
-    public Id!: string;
+    public id!: string;
 
     public messages!: MessageModel[];
 

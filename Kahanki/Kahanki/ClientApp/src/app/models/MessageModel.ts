@@ -1,5 +1,5 @@
 export class MessageModel {
-    public Id!: string;
+    public id!: string;
 
     public senderId!: string;
 

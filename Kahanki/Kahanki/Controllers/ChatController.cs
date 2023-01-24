@@ -33,6 +33,30 @@ public class ChatController : ControllerBase
     {
         var currentUserId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        return _chatService.GetChat(currentUserId, targetUserId);
+        var result = _chatService.GetChat(currentUserId, targetUserId);
+
+        result.Messages.AddRange(new List<Message>
+        {
+            new Message
+            {
+                Id = Guid.NewGuid().ToString(),
+                Content = "qweqew",
+                SenderId = result.Users[0].Id
+            },
+            new Message
+            {
+                Id = Guid.NewGuid().ToString(),
+                Content = "werwerwe",
+                SenderId = result.Users[1].Id
+            },
+            new Message
+            {
+                Id = Guid.NewGuid().ToString(),
+                Content = "1112121",
+                SenderId = result.Users[0].Id
+            }
+        });
+
+        return result;
     }
 }

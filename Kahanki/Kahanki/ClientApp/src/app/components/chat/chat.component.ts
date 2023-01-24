@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   currentMessage: string = '';
 
   chat: ChatModel = {
-    Id: '',
+    id: '',
     messages: [],
     users: []
   }
@@ -26,8 +26,21 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.id = params['id'];
-       this.populate();
-      //  this.chatService.GetChatByTargetId(this.id).toPromise().then(c => this.chat = c);
+
+      this.chatService.GetChatByTargetId(this.id).toPromise().then(c => {
+          this.chat = {
+            id: c.id,
+            users: c.users.map(s => ({
+              id: s.id,
+                userName: s.userName
+            })),
+            messages: c.messages.map(s => ({
+              id: s.id,
+              content: s.content,
+              created: s.created,
+              senderId: s.senderId}))
+          };   
+        });
     });
   }
 
@@ -37,41 +50,5 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   Send() {
 
-  }
-
-  populate() {
-    this.chat = {
-      Id: 'qweqwe',
-      users: [
-        {
-          Id: '1',
-          userName: 'Bob'
-        },
-        {
-          Id: '2',
-          userName: 'Alice'
-        }
-      ],
-      messages: [
-        {
-          Id:'qwe',
-          senderId:'1',
-          content: 'qweqweqwe',
-          created: new Date()
-        },
-        {
-          Id:'qwe',
-          senderId:'2',
-          content: 'terwteryer',
-          created: new Date()
-        },
-        {
-          Id:'qwe',
-          senderId:'1',
-          content: 'qweqweqwe',
-          created: new Date()
-        }
-      ]
-    }
   }
 }

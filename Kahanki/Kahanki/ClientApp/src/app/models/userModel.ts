@@ -1,4 +1,4 @@
 export class UserModel {
-    public Id!: string;
+    public id!: string;
     public userName!: string;
 }
