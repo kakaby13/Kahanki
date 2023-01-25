@@ -1,1 +1,16 @@
-<div>chat with id {{id}}</div>
+<!-- <div>chat with id {{id}}</div> -->
+
+<div>
+    <div id="messages" *ngFor="let message of chat.messages">
+        <div class="message message-a" *ngIf="message.senderId == chat.users[0].id">
+            <div>{{chat.users[0].userName}} says {{message.content}}</div>
+            <div>{{message.created}}</div>
+        </div>
+        <div class="message message-b" *ngIf="message.senderId == chat.users[1].id">
+            <div>{{chat.users[1].userName}} says {{message.content}}</div>
+            <div>{{message.created}}</div>
+        </div>
+    </div>
+    <input type="text" class="text-box" [(ngModel)]="currentMessage"/>
+    <input type="button" (click)="Send()" value="Send message"/>
+</div>

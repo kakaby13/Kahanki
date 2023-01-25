@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Kahanki.Models;
 using Kahanki.Services;
 using Kahanki.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,14 @@ public class ChatController : ControllerBase
     }
 
     [HttpGet("GetChatByTargetUserId")]
-    public ChatModel GetChatByTargetUserId(string targetUserId)
+    public Chat GetChatByTargetUserId(string targetUserId)
     {
         var currentUserId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        return _chatService.GetChat(currentUserId, targetUserId);
+        var result = _chatService.GetChat(currentUserId, targetUserId);
+
+        result.Messages = result.Messages.OrderBy(c => c.Created).ToList();
+
+        return result;
     }
 }

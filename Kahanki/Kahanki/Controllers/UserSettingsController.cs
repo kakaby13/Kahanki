@@ -29,4 +29,10 @@ public class UserSettingsController : GenericController<UserSettings>
 
         return _userSettingsService.GetUserSettingsByUserId(currentUserId);
     }
+
+    [HttpGet("GetCurrentUserId")]
+    public string GetCurrentUser()
+    {
+        return _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    }
 }
