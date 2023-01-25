@@ -19,7 +19,8 @@ const PROXY_CONFIG = [
       "/_framework"
    ],
     target: target,
-    secure: false
+    secure: false,
+    ws: true
   }
 ]
 

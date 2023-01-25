@@ -4,7 +4,6 @@ import { ChatModel } from 'src/app/models/chatModel';
 import { ChatService } from 'src/app/services/chatService';
 import * as signalR from "@microsoft/signalr";
 import { UserService } from 'src/app/services/userService';
-import { async } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -43,15 +42,17 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.connection
     .start()
-    .then(() => console.log('!!!!!!!!!!Connection started'))
-    .catch(err => console.log('!!!!!!!!!!Error while starting connection: ' + err));
+    .then(() => console.log('WS connection started'))
+    .catch(err => console.log('Error while starting WS connection: ' + err));
   }
 
   async ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.id = params['id'];
 
-      this.chatService.GetChatByTargetId(this.id).toPromise().then(c => {
+      this.chatService.GetChatByTargetId(this.id)
+      .toPromise()
+      .then(c => {
           this.chat = {
             id: c.id,
             users: c.users.map(s => ({
@@ -66,18 +67,17 @@ export class ChatComponent implements OnInit, OnDestroy {
           };   
 
 
-          this.connection.on('messageReceived', (chatId: string, username: string, message: string) => {
+          this.connection.on('messageReceived', (chatId: string, username: string, message: string, created: Date) => {
             if(chatId == this.chat.id) {
-              const m = document.createElement("div");
-              const messages: HTMLDivElement = document.querySelector("#messages")!;
-              m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
-            
-              messages.appendChild(m);
+
+              this.chat.messages.push({
+                id: '',
+                content: message,
+                senderId: username,
+                created: created
+              })
             }
           });
-
-
-      
         });
     });
   }
