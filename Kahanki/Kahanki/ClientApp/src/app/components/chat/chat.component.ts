@@ -21,6 +21,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   currentUserId: string = '';
 
+  secondUserName: string = '';
+
   chat: ChatModel = {
     id: '',
     messages: [],
@@ -55,10 +57,13 @@ export class ChatComponent implements OnInit, OnDestroy {
       .then(c => {
           this.chat = {
             id: c.id,
-            users: c.users.map(s => ({
+            users: c.users.map(s => {
+              if(s.id == this.id) 
+                this.secondUserName = s.userName
+              return ({
               id: s.id,
                 userName: s.userName
-            })),
+            })}),
             messages: c.messages.map(s => ({
               id: s.id,
               content: s.content,
