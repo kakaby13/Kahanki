@@ -11,5 +11,9 @@
         public int Sex { get; set; }
 
         public int Preferences { get; set; }
+
+        public string RealName { get; set; }
+
+        public string ShortBio { get; set; }
     }
 }
