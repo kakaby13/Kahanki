@@ -1,15 +1,20 @@
 <div class="flex items-center flex-col">
   <h1 class="p-3">Список чатов</h1>
   <div *ngIf="chatList" class="w-full">
-    <div *ngFor="let chat of chatList">
+    <div *ngFor="let chat of chatList" class="">
       <div
-        class="white-card flex h-20 m-2 items-center"
+        class="white-card flex h-20 m-2 items-center justify-between"
         [routerLink]="['/chat', chat.id]"
       >
-        <div
-          class="bg-pink m-2 w-16 h-16 rounded-full bg-cover bg-no-repeat bg-[url('https://koshka.top/uploads/posts/2021-12/1638771511_1-koshka-top-p-milogo-kotika-v-shapochke-1.jpg')]"
-        ></div>
-        <div class="m-2">{{ chat.name }}</div>
+        <div class="flex items-center">
+          <div
+            class="bg-pink m-2 w-16 h-16 rounded-full bg-cover bg-no-repeat bg-[url('https://koshka.top/uploads/posts/2021-12/1638771511_1-koshka-top-p-milogo-kotika-v-shapochke-1.jpg')]"
+          ></div>
+          <div class="m-2">{{ chat.name }}</div>
+        </div>
+        <div class="h-full flex flex-col justify-center pr-2">
+          <img class="h-1/2 p-2" src="./assets/cross.png" alt="" />
+        </div>
       </div>
     </div>
   </div>
