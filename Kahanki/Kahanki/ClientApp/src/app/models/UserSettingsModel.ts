@@ -7,4 +7,12 @@ export class UserSettingsModel
     sex!: number;
 
     preferences!: number;
+
+    job!: string;
+
+    education!: string;
+
+    about!: string;
+
+    //zodiac!: string;
 }
