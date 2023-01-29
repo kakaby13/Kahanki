@@ -39,4 +39,13 @@ public class MatchService : IMatchService
 
         return false;
     }
+
+    public void DisMatch(string currentUser, string targetUser)
+    {
+
+        var match = _db.UserMatchActions.Single(r => r.ActedUserId == currentUser && r.TargetUserId == targetUser);
+        match.ActionId = (int)MatchAction.Dislike;
+        _db.UserMatchActions.Update(match);
+        _db.SaveChanges();
+    }
 }

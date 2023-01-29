@@ -11,10 +11,12 @@ import { DateService } from 'src/app/services/dateService';
 export class SwipeComponent {
 
   public candidate: UserProfileModel = {
-      id: '',
-      age: 0,
-      name: '',
-      description: ''
+    id: '',
+    age: 0,
+    name: '',
+    description: '',
+    job: '',
+    education: ''
   }
 
   constructor(private dateService: DateService) {
@@ -25,7 +27,7 @@ export class SwipeComponent {
   }
 
   public Next() {
-    this.dateService.GetNext().toPromise().then(c => this.candidate = c);
+    this.dateService.GetNext().toPromise().then(c => c != null ? this.candidate = c : this.candidate.id = '');
   }
 
   public Like() {

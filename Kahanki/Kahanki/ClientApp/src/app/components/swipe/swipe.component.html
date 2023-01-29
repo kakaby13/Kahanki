@@ -1,4 +1,7 @@
-<div class="container flex justify-center items-center mt-20">
+<div
+  *ngIf="candidate.id != ''"
+  class="container flex justify-center items-center mt-20"
+>
   <div class="w-2/3 h-600px flex z-0 white-card">
     <div class="h-full w-1/2 flex-col justify-between">
       <div
@@ -10,20 +13,20 @@
         <span class="text-lg font-medium"
           >{{ candidate.name }}, {{ candidate.age }}</span
         >
-        <!-- <span class=""> ЦЦР, developer </span> -->
       </div>
     </div>
     <div class="w-1/2 p-2.5 pb-5 flex flex-col justify-between">
-      <div class="common items-center">
+      <div class="common flex flex-col">
         <h3 class="text-lg font-medium">Общая информация</h3>
-        <span></span>
+        <span class="tex"> {{ candidate.job }} </span>
+        <span class="tex"> {{ candidate.education }} </span>
       </div>
       <div class="common items-center">
         <h3 class="text-lg font-medium">Обо мне</h3>
         <span>{{ candidate.description }}</span>
       </div>
       <div class="common items-center">
-        <h3 class="text-lg font-medium">Где меня найти:</h3>
+        <h3 class="text-lg font-medium"></h3>
         <span></span>
       </div>
     </div>
@@ -44,4 +47,10 @@
       <img class="h-full p-3" src="./assets/cross.png" alt="" />
     </div>
   </div>
+</div>
+<div
+  *ngIf="candidate.id == ''"
+  class=" h-600px flex white-card items-center justify-center"
+>
+  <p>В данный момент анкеты отсутствуют</p>
 </div>

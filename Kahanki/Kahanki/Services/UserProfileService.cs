@@ -28,6 +28,8 @@ public class UserProfileService : IUserProfileService
         var candidates = _db.ApplicationUsers
             .Include(c => c.UserSettings)
             .Where(c => c.UserSettings.Preferences == user.UserSettings.Sex &&
+                        c.UserSettings.AgeFrom <= user.UserSettings.Age &&
+                        c.UserSettings.AgeTo >= user.UserSettings.Age &&
                         c.UserSettings.Sex == user.UserSettings.Preferences &&
                         !alreadyActedUser.Contains(c.Id))
             .ToList();
@@ -44,8 +46,10 @@ public class UserProfileService : IUserProfileService
         {
             Id = target.Id,
             Age = target.UserSettings.Age,
-            Description = "bla bla",
-            Name = target.NormalizedUserName
+            Description = target.UserSettings.Description,
+            Job = target.UserSettings.Job,
+            Education = target.UserSettings.Education,
+            Name = target.UserSettings.RealName
         };
     }
 

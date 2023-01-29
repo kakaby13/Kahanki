@@ -19,4 +19,8 @@ export class DateService {
     SubmitUserCation(targetUserId: string, actionId: number) {
         return this.httpClient.get(`${this.baseUrl + ApiRoutes.Date}/SubmitUserAction?targetUserId=${targetUserId}&actionId=${actionId}`) as Observable<boolean>;
     }
+
+    DisMatch(targetUser: string) {
+        return this.httpClient.get(`${this.baseUrl + ApiRoutes.Date}/DisMatch?targetUser=${targetUser}`) as Observable<boolean>;
+    }
   }

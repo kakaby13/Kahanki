@@ -1,7 +1,7 @@
-<div class="white-card flex flex-col p-3 mt-5 sm:mt-10">
+<div class="white-card h-3/4 flex flex-col p-3 mt-5 sm:mt-10">
   <div class="flex items-center mb-2">
     <div
-      class="bg-pink m-2 w-16 h-16  rounded-full bg-cover bg-no-repeat bg-[url('https://koshka.top/uploads/posts/2021-12/1638771511_1-koshka-top-p-milogo-kotika-v-shapochke-1.jpg')]"
+      class="bg-orange m-2 w-16 h-16  rounded-full bg-cover bg-no-repeat bg-[url('https://koshka.top/uploads/posts/2021-12/1638771511_1-koshka-top-p-milogo-kotika-v-shapochke-1.jpg')]"
     ></div>
     <div class="ml-2">{{ secondUserName }}</div>
   </div>
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="flex mt-3">
+  <div class="flex mt-3" id="messageInput">
     <input
       [(ngModel)]="currentMessage"
       (keyup.enter)="Send()"

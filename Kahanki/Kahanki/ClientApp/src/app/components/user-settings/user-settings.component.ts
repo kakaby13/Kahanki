@@ -16,8 +16,10 @@ export class UserSettingsComponent {
     preferences: 0,
     job: "",
     education: "",
-    about: "",
-    //zodiac: "",
+    description: "",
+    ageFrom: 0,
+    ageTo: 0,
+    realName: ''
   };
 
   constructor(private userSettingsService: UserSettingsService) {

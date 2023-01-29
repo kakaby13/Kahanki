@@ -4,6 +4,7 @@ import { ChatModel } from 'src/app/models/chatModel';
 import { ChatService } from 'src/app/services/chatService';
 import * as signalR from "@microsoft/signalr";
 import { UserService } from 'src/app/services/userService';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
@@ -33,24 +34,26 @@ export class ChatComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private chatService: ChatService, 
     private userService: UserService, 
+    private scroller: ViewportScroller,
     @Inject('BASE_URL') private baseUrl: string) {
 
+      this.userService.GetCurrentUserId().subscribe(c => this.currentUserId = c);
       
-    this.userService.GetCurrentUserId().subscribe(c => this.currentUserId = c);
-
-    this.connection = new signalR.HubConnectionBuilder()
-    .withUrl(baseUrl+"chatHub")
-    .build()
-
-    this.connection
-    .start()
-    .then(() => console.log('WS connection started'))
-    .catch(err => console.log('Error while starting WS connection: ' + err));
+      this.connection = new signalR.HubConnectionBuilder()
+      .withUrl(baseUrl+"chatHub")
+      .build()
+      
+      this.connection
+      .start()
+      .then(() => console.log('WS connection started'))
+      .catch(err => console.log('Error while starting WS connection: ' + err));
+      this.goDown();
   }
 
   async ngOnInit() {
+    this.goDown();
     this.sub = this.route.params.subscribe(params => {
-       this.id = params['id'];
+      this.id = params['id'];
 
       this.chatService.GetChatByTargetId(this.id)
       .toPromise()
@@ -71,7 +74,6 @@ export class ChatComponent implements OnInit, OnDestroy {
               senderId: s.senderId}))
           };   
 
-
           this.connection.on('messageReceived', (chatId: string, username: string, message: string, created: Date) => {
             if(chatId == this.chat.id) {
 
@@ -83,8 +85,13 @@ export class ChatComponent implements OnInit, OnDestroy {
               })
             }
           });
+          this.goDown();
         });
     });
+  }
+
+  goDown() {
+    this.scroller.scrollToAnchor("messageInput");
   }
 
   ngOnDestroy() {
@@ -92,8 +99,10 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   Send() {
-    this.connection
-    .send('sendMessage', this.chat.id, this.currentUserId, this.currentMessage)
-    .then(() => (this.currentMessage = ""));
+    if(this.currentMessage.trim() != "") {
+      this.connection
+      .send('sendMessage', this.chat.id, this.currentUserId, this.currentMessage)
+      .then(() => (this.currentMessage = ""));
+    }
   }
 }

@@ -2,6 +2,8 @@ export class UserSettingsModel
 {
     id!: string;
 
+    realName!: string;
+
     age!: number;
 
     sex!: number;
@@ -12,7 +14,9 @@ export class UserSettingsModel
 
     education!: string;
 
-    about!: string;
+    description!: string;
 
-    //zodiac!: string;
+    ageFrom!: number;
+
+    ageTo!: number;
 }

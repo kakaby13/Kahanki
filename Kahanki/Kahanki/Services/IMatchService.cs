@@ -7,5 +7,7 @@ namespace Kahanki.Services
         List<string> GetAllCouplesByUserId(string userId);
 
         bool CheckIsMatchTakePlace(UserMatchAction matchAction);
+
+        void DisMatch(string currentUser, string targetUser);
     }
 }

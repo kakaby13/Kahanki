@@ -7,4 +7,8 @@ export class UserProfileModel
     name!: string;
 
     description!: string;
+
+    job!: string;
+
+    education!: string;
 }
